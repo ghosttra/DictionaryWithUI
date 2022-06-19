@@ -22,14 +22,14 @@ namespace DictionaryWithUI.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class ua_pack {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal ua_pack() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace DictionaryWithUI.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DictionaryWithUI.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DictionaryWithUI.Properties.ua_pack", typeof(ua_pack).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,62 +61,20 @@ namespace DictionaryWithUI.Properties {
         }
         
         /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        ///   Ищет локализованную строку, похожую на Словник.
         /// </summary>
-        internal static System.Drawing.Bitmap graycustbuttonLEFTedge {
+        internal static string Dictionary {
             get {
-                object obj = ResourceManager.GetObject("graycustbuttonLEFTedge", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("Dictionary", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        ///   Ищет локализованную строку, похожую на Файл.
         /// </summary>
-        internal static System.Drawing.Bitmap graycustbuttonRIGHTedge {
+        internal static string File {
             get {
-                object obj = ResourceManager.GetObject("graycustbuttonRIGHTedge", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap purplecustbuttonLEFTedge {
-            get {
-                object obj = ResourceManager.GetObject("purplecustbuttonLEFTedge", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap purplecustbuttonRIGHTedge {
-            get {
-                object obj = ResourceManager.GetObject("purplecustbuttonRIGHTedge", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap reverseButtonBlack {
-            get {
-                object obj = ResourceManager.GetObject("reverseButtonBlack", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap reverseButtonWhite {
-            get {
-                object obj = ResourceManager.GetObject("reverseButtonWhite", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("File", resourceCulture);
             }
         }
     }

@@ -52,6 +52,12 @@
     <Compile Include="CustomButton.Designer.cs">
       <DependentUpon>CustomButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomLabel.Designer.cs">
+      <DependentUpon>CustomLabel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +68,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CustomButton.resx">
       <DependentUpon>CustomButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomLabel.resx">
+      <DependentUpon>CustomLabel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -95,13 +104,16 @@
     <None Include="Resources\graycustbuttonRIGHTedge.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\graybutton.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\purplecustbuttonRIGHTedge.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\purplecustbuttonLEFTedge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reverseButtonBlack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reverseButtonWhite.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
