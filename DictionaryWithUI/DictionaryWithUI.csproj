@@ -71,6 +71,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ua_pack.resx</DependentUpon>
     </Compile>
+    <Compile Include="TranslateXMLSerialization.cs" />
     <EmbeddedResource Include="CustomButton.resx">
       <DependentUpon>CustomButton.cs</DependentUpon>
     </EmbeddedResource>

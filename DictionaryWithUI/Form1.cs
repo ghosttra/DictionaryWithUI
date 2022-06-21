@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using System.Windows.Forms;
 using System.Xml;
+using System.IO;
 
 namespace DictionaryWithUI
 {
@@ -17,8 +19,8 @@ namespace DictionaryWithUI
         List<Translate> translates = new List<Translate>();
         public Dictionary()
         {
-            formlanguages.Add("Ukranian");
             InitializeComponent();
+            formlanguages.Add("Ukrainian");
             DictionarymenuStrip.ForeColor = Color.White;
             for (int i = 0; i < formlanguages.Count; i++)
             {
@@ -131,37 +133,7 @@ namespace DictionaryWithUI
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            DialogResult dialogResult = fileDialog.ShowDialog();
-            if (dialogResult == DialogResult.OK)
-            {
-                XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.Load(fileDialog.FileName);
-                for (int i = 0; i < xmlDocument.DocumentElement.ChildNodes.Count; i++)
-                {
-                    Translate translate = new Translate();
-                    for (int r = 0; r < xmlDocument.DocumentElement.ChildNodes[i].ChildNodes.Count; r++)
-                    {
-                        if (r == 2)
-                        {
-
-                            for (int j = 0; j < xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes.Count; j++)
-                            {
-                                if (translate.translates.Keys.ToList().Find(pred => pred == xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes[j].Name) == null)
-                                    translate.translates.Add(xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes[j].Name, new List<string>());
-                                translate.translates[xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes[j].Name].Add(xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes[j].InnerText);
-                            }
-                        }
-                        else if (r == 0)
-                            translate.Language = (xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].InnerText);
-                        else if (r == 1)
-                            translate.Word = (xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].InnerText);
-                    }
-                    translates.Add(translate);
-                }
-
-
-            }
+            TranslateXMLSerialization.Load(translates);
 
         }
 
@@ -172,7 +144,7 @@ namespace DictionaryWithUI
                 (DictionariesPanel.Controls[i] as CustomButton).Checked = false;
                 (DictionariesPanel.Controls[i] as CustomButton).Normalizate();
             }
-                
+
             foreach (Control control in Controls)
             {
                 if (control is Panel && control != DictionariesPanel)
@@ -250,15 +222,23 @@ namespace DictionaryWithUI
                 if (temporary.translates.ContainsKey(key))
                     TranslatedWords.Items.AddRange(temporary.translates[key].ToArray());
             }
-                
+
         }
 
         private void programToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
+
+       
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TranslateXMLSerialization.Save(translates);
+        }
     }
-    class Translate
+    [Serializable]
+    public class Translate
     {
         public string Language { get; set; }
         public string Word { get; set; }
@@ -274,5 +254,7 @@ namespace DictionaryWithUI
             Word = word;
             this.translates = translates;
         }
+        
     }
+    
 }
