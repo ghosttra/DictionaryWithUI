@@ -13,11 +13,32 @@ namespace DictionaryWithUI
 {
     public partial class Dictionary : Form
     {
+        List<string> formlanguages = new List<string>();
         List<Translate> translates = new List<Translate>();
         public Dictionary()
         {
+            formlanguages.Add("Ukranian");
             InitializeComponent();
             DictionarymenuStrip.ForeColor = Color.White;
+            for (int i = 0; i < formlanguages.Count; i++)
+            {
+                languageToolStripMenuItem.DropDownItems.Add(formlanguages[i]);
+                languageToolStripMenuItem.DropDownItems[i].Click += SetLanguage;
+            }
+        }
+
+        private void SetLanguage(object sender, EventArgs e)
+        {
+            for (int i = 0; i < formlanguages.Count; i++)
+            {
+                if ((sender as ToolStripItem).Text == formlanguages[i])
+                {
+                    fileToolStripMenuItem.Text = Properties.ua_pack.File;
+                    dictionaryToolStripMenuItem.Text = Properties.ua_pack.Dictionary;
+                }
+
+            }
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -27,12 +48,12 @@ namespace DictionaryWithUI
                 (Controls["DictionariesPanel"].Controls[i] as CustomButton).Normalizate();
             }
             int x = 0;
-            string[] strings = { "dkjfghjdgjdgd", "4568435enkjgdjhgsjerghewsf", "4598648ujgdfkgdghedrgfdgd", "54786y8ghdgkdhgjsdf" };
+            string[] strings = { "French|English", "Italian|French", "Spanish|English", "Ukrainian|Portugalian" };
             Random rnd = new Random();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < strings.Length; i++)
             {
                 CustomButton btn = new CustomButton();
-                //btn.TextOnTheButton = ;
+                btn.TextOnTheButton = strings[i];
                 btn.Normalizate();
                 btn.Clicked += new EventHandler(CheckIfCheckedExists);
                 x += Controls["DictionariesPanel"].Controls[i].Width + 10;
@@ -42,6 +63,30 @@ namespace DictionaryWithUI
             }
 
         }
+        public void SelectedButtonChanged()
+        {
+            if (SelectedButton != null)
+            {
+                string firstLanguage = SelectedButton.TextOnTheButton.Split('|')[0];
+                string translatedLanguage = SelectedButton.TextOnTheButton.Split('|')[1];
+                if (AddWordPanel.Visible)
+                {
+                    FirstLanguageLabel.LabelText = firstLanguage;
+                    ForeignLabel.LabelText = translatedLanguage;
+                }
+                if (WordsShowPanel.Visible)
+                {
+                    WordsFirstLanguage.Items.Clear();
+                    TranslatedWords.Items.Clear();
+                    var a = translates.Where(pred => pred.Language == firstLanguage).ToList();
+                    for (int i = 0; i < a.Count; i++)
+                    {
+                        WordsFirstLanguage.Items.Add(a[i].Word);
+                    }
+                }
+            }
+        }
+
         CustomButton SelectedButton = null;
         private void CheckIfCheckedExists(object sender, EventArgs e)
         {
@@ -55,6 +100,7 @@ namespace DictionaryWithUI
                     if (SelectedButton == null)
                     {
                         SelectedButton = (Controls["DictionariesPanel"].Controls[i] as CustomButton);
+                        SelectedButtonChanged();
                         break;
                     }
                     else if ((Controls["DictionariesPanel"].Controls[i] as CustomButton) != SelectedButton)
@@ -62,13 +108,18 @@ namespace DictionaryWithUI
                         SelectedButton.Checked = false;
                         SelectedButton.Normalizate();
                         SelectedButton = (Controls["DictionariesPanel"].Controls[i] as CustomButton);
+                        SelectedButtonChanged();
                         break;
                     }
                 }
 
             }
             if (counter == 0)
+            {
                 SelectedButton = null;
+                SelectedButtonChanged();
+            }
+
         }
         private void FirstLanguageTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -86,36 +137,48 @@ namespace DictionaryWithUI
             {
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.Load(fileDialog.FileName);
-                Translate translate = new Translate();
                 for (int i = 0; i < xmlDocument.DocumentElement.ChildNodes.Count; i++)
                 {
+                    Translate translate = new Translate();
                     for (int r = 0; r < xmlDocument.DocumentElement.ChildNodes[i].ChildNodes.Count; r++)
                     {
                         if (r == 2)
                         {
-                            List<string> tempList = new List<string>();
+
                             for (int j = 0; j < xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes.Count; j++)
                             {
-                               tempList.Add(xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes[j].InnerText);
+                                if (translate.translates.Keys.ToList().Find(pred => pred == xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes[j].Name) == null)
+                                    translate.translates.Add(xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes[j].Name, new List<string>());
+                                translate.translates[xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes[j].Name].Add(xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes[j].InnerText);
                             }
-                            translate.translates.Add(xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes[0].Name, tempList);
-                            tempList = null;
                         }
                         else if (r == 0)
                             translate.Language = (xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].InnerText);
                         else if (r == 1)
                             translate.Word = (xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].InnerText);
                     }
-
+                    translates.Add(translate);
                 }
-                translates.Add(translate);
+
+
             }
 
         }
 
         private void addWordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddWordPanel.Visible = !AddWordPanel.Visible;
+            for (int i = 0; i < DictionariesPanel.Controls.Count; i++)
+            {
+                (DictionariesPanel.Controls[i] as CustomButton).Checked = false;
+                (DictionariesPanel.Controls[i] as CustomButton).Normalizate();
+            }
+                
+            foreach (Control control in Controls)
+            {
+                if (control is Panel && control != DictionariesPanel)
+                    control.Visible = false;
+            }
+            AddWordPanel.Visible = true;
         }
 
         private void ToolStripMenuItem_MouseEnter(object sender, EventArgs e)
@@ -134,20 +197,65 @@ namespace DictionaryWithUI
                 (tools as ToolStripItem).ForeColor = Color.Gray;
             }
         }
-
+        public string MessageBoxText { get; set; } = "Please choose at LEAST one dictionary!";
         private void AddWordcustomButton_Clicked(object sender, EventArgs e)
         {
-            int counter = 0;
+            AddWordcustomButton.Checked = false;
+            int index = -1;
             for (int i = 0; i < Controls["DictionariesPanel"].Controls.Count; i++)
             {
-
                 if ((Controls["DictionariesPanel"].Controls[i] as CustomButton).Checked)
                 {
-                    counter++;
+                    index = i;
+                    break;
                 }
             }
-            string text;
-            counter == 0 ? MessageBox.Show() :
+            if (index == -1)
+                MessageBox.Show(MessageBoxText, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+            {
+                string thisLanguage = (Controls["DictionariesPanel"].Controls[index] as CustomButton).TextOnTheButton.Split('|')[0];
+                Translate translate = new Translate();
+                translate.Language = thisLanguage;
+                translate.Word = FirstLanguageTextBox.Text;
+                List<string> templist = new List<string>();
+                templist.Add(TranslatedTextBox.Text);
+                translate.translates.Add((Controls["DictionariesPanel"].Controls[index] as CustomButton).TextOnTheButton.Split('|')[1], templist);
+                translates.Add(translate);
+            }
+        }
+
+        private void showToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < DictionariesPanel.Controls.Count; i++)
+            {
+                (DictionariesPanel.Controls[i] as CustomButton).Checked = false;
+                (DictionariesPanel.Controls[i] as CustomButton).Normalizate();
+            }
+            foreach (Control control in Controls)
+            {
+                if (control is Panel && control != DictionariesPanel)
+                    control.Visible = false;
+            }
+            WordsShowPanel.Visible = true;
+        }
+
+        private void WordsFirstLanguage_Click(object sender, EventArgs e)
+        {
+            TranslatedWords.Items.Clear();
+            var temporary = translates.Find(pred => pred.Language == SelectedButton.TextOnTheButton.Split('|')[0] && pred.translates.Keys.ToList().Find(pred1 => pred1 == SelectedButton.TextOnTheButton.Split('|')[1]) != null);
+            if (temporary != null)
+            {
+                string key = SelectedButton.TextOnTheButton.Split('|')[1];
+                if (temporary.translates.ContainsKey(key))
+                    TranslatedWords.Items.AddRange(temporary.translates[key].ToArray());
+            }
+                
+        }
+
+        private void programToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
     class Translate
