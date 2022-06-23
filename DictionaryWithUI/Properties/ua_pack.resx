@@ -123,4 +123,16 @@
   <data name="File" xml:space="preserve">
     <value>Файл</value>
   </data>
+  <data name="Open" xml:space="preserve">
+    <value>Відкрити</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранити</value>
+  </data>
+  <data name="Translator" xml:space="preserve">
+    <value>Перекладач</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Вид</value>
+  </data>
 </root>

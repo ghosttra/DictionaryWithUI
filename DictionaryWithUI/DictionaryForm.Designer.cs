@@ -32,41 +32,35 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportWordToSeparateFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dictionaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.addDictionaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteDictionaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.translatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.FindWordTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.ResultComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.vievToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.thremeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.programToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DictionariesPanel = new System.Windows.Forms.Panel();
             this.FirstLanguageTextBox = new System.Windows.Forms.TextBox();
             this.TranslatedTextBox = new System.Windows.Forms.TextBox();
             this.AddWordPanel = new System.Windows.Forms.Panel();
-            this.reversePicture = new System.Windows.Forms.PictureBox();
-            this.WordsShowPanel = new System.Windows.Forms.Panel();
-            this.TranslatedWords = new System.Windows.Forms.ListBox();
-            this.WordsFirstLanguage = new System.Windows.Forms.ListBox();
-            this.customButton2 = new DictionaryWithUI.CustomButton();
-            this.customButton3 = new DictionaryWithUI.CustomButton();
-            this.customButton1 = new DictionaryWithUI.CustomButton();
             this.AddWordcustomButton = new DictionaryWithUI.CustomButton();
             this.ForeignLabel = new DictionaryWithUI.CustomLabel();
             this.FirstLanguageLabel = new DictionaryWithUI.CustomLabel();
             this.ExprToTranslateLabel = new DictionaryWithUI.CustomLabel();
             this.TranslatedExprLabel = new DictionaryWithUI.CustomLabel();
+            this.WordsShowPanel = new System.Windows.Forms.Panel();
+            this.DeletewordBtn = new DictionaryWithUI.CustomButton();
+            this.TranslatedWords = new System.Windows.Forms.ListBox();
+            this.WordsFirstLanguage = new System.Windows.Forms.ListBox();
             this.DictionarymenuStrip.SuspendLayout();
-            this.DictionariesPanel.SuspendLayout();
             this.AddWordPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.reversePicture)).BeginInit();
             this.WordsShowPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,20 +72,19 @@
             this.fileToolStripMenuItem,
             this.dictionaryToolStripMenuItem,
             this.translatorToolStripMenuItem,
-            this.vievToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.vievToolStripMenuItem});
             this.DictionarymenuStrip.Location = new System.Drawing.Point(0, 0);
             this.DictionarymenuStrip.Name = "DictionarymenuStrip";
             this.DictionarymenuStrip.Size = new System.Drawing.Size(800, 26);
             this.DictionarymenuStrip.TabIndex = 1;
             this.DictionarymenuStrip.Text = "menuStrip1";
-            this.DictionarymenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.DictionarymenuStrip_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
-            this.saveToolStripMenuItem});
+            this.saveToolStripMenuItem,
+            this.exportWordToSeparateFileToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(40, 22);
             this.fileToolStripMenuItem.Text = "File";
@@ -102,7 +95,7 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -110,9 +103,16 @@
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // exportWordToSeparateFileToolStripMenuItem
+            // 
+            this.exportWordToSeparateFileToolStripMenuItem.Name = "exportWordToSeparateFileToolStripMenuItem";
+            this.exportWordToSeparateFileToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.exportWordToSeparateFileToolStripMenuItem.Text = "Export word to separate file";
+            this.exportWordToSeparateFileToolStripMenuItem.Click += new System.EventHandler(this.exportWordToSeparateFileToolStripMenuItem_Click);
             // 
             // dictionaryToolStripMenuItem
             // 
@@ -120,7 +120,8 @@
             this.showToolStripMenuItem,
             this.addWordToolStripMenuItem,
             this.toolStripSeparator2,
-            this.addDictionaryToolStripMenuItem});
+            this.addDictionaryToolStripMenuItem,
+            this.deleteDictionaryToolStripMenuItem});
             this.dictionaryToolStripMenuItem.Name = "dictionaryToolStripMenuItem";
             this.dictionaryToolStripMenuItem.Size = new System.Drawing.Size(83, 22);
             this.dictionaryToolStripMenuItem.Text = "Dictionary";
@@ -130,28 +131,35 @@
             // showToolStripMenuItem
             // 
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.showToolStripMenuItem.Text = "Show";
             this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
             // addWordToolStripMenuItem
             // 
             this.addWordToolStripMenuItem.Name = "addWordToolStripMenuItem";
-            this.addWordToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.addWordToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.addWordToolStripMenuItem.Text = "Add word";
             this.addWordToolStripMenuItem.Click += new System.EventHandler(this.addWordToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(164, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(180, 6);
             // 
             // addDictionaryToolStripMenuItem
             // 
             this.addDictionaryToolStripMenuItem.Name = "addDictionaryToolStripMenuItem";
-            this.addDictionaryToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.addDictionaryToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.addDictionaryToolStripMenuItem.Text = "Add dictionary";
             this.addDictionaryToolStripMenuItem.Click += new System.EventHandler(this.addDictionaryToolStripMenuItem_Click);
+            // 
+            // deleteDictionaryToolStripMenuItem
+            // 
+            this.deleteDictionaryToolStripMenuItem.Name = "deleteDictionaryToolStripMenuItem";
+            this.deleteDictionaryToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.deleteDictionaryToolStripMenuItem.Text = "Delete dictionary";
+            this.deleteDictionaryToolStripMenuItem.Click += new System.EventHandler(this.deleteDictionaryToolStripMenuItem_Click);
             // 
             // translatorToolStripMenuItem
             // 
@@ -166,31 +174,39 @@
             // findWordToolStripMenuItem
             // 
             this.findWordToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripComboBox1,
-            this.toolStripTextBox1});
+            this.FindWordTextBox,
+            this.toolStripSeparator3,
+            this.ResultComboBox});
             this.findWordToolStripMenuItem.Name = "findWordToolStripMenuItem";
             this.findWordToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.findWordToolStripMenuItem.Text = "Find word";
             // 
-            // toolStripComboBox1
+            // FindWordTextBox
             // 
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 23);
+            this.FindWordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.FindWordTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.FindWordTextBox.Name = "FindWordTextBox";
+            this.FindWordTextBox.Size = new System.Drawing.Size(100, 23);
+            this.FindWordTextBox.TextChanged += new System.EventHandler(this.FindWordTextBox_TextChanged);
             // 
-            // toolStripTextBox1
+            // toolStripSeparator3
             // 
-            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 23);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(178, 6);
+            // 
+            // ResultComboBox
+            // 
+            this.ResultComboBox.Name = "ResultComboBox";
+            this.ResultComboBox.Size = new System.Drawing.Size(121, 23);
+            this.ResultComboBox.Text = "Result";
             // 
             // vievToolStripMenuItem
             // 
             this.vievToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.languageToolStripMenuItem,
-            this.thremeToolStripMenuItem});
+            this.languageToolStripMenuItem});
             this.vievToolStripMenuItem.Name = "vievToolStripMenuItem";
-            this.vievToolStripMenuItem.Size = new System.Drawing.Size(47, 22);
-            this.vievToolStripMenuItem.Text = "Viev";
+            this.vievToolStripMenuItem.Size = new System.Drawing.Size(49, 22);
+            this.vievToolStripMenuItem.Text = "View";
             this.vievToolStripMenuItem.MouseEnter += new System.EventHandler(this.ToolStripMenuItem_MouseEnter);
             this.vievToolStripMenuItem.MouseLeave += new System.EventHandler(this.ToolStripMenuItem_MouseLeave);
             // 
@@ -200,41 +216,9 @@
             this.languageToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.languageToolStripMenuItem.Text = "Language";
             // 
-            // thremeToolStripMenuItem
-            // 
-            this.thremeToolStripMenuItem.Name = "thremeToolStripMenuItem";
-            this.thremeToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
-            this.thremeToolStripMenuItem.Text = "Theme";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(48, 22);
-            this.helpToolStripMenuItem.Text = "Help";
-            this.helpToolStripMenuItem.MouseEnter += new System.EventHandler(this.ToolStripMenuItem_MouseEnter);
-            this.helpToolStripMenuItem.MouseLeave += new System.EventHandler(this.ToolStripMenuItem_MouseLeave);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.programToolStripMenuItem});
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // programToolStripMenuItem
-            // 
-            this.programToolStripMenuItem.Name = "programToolStripMenuItem";
-            this.programToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.programToolStripMenuItem.Text = "Program";
-            this.programToolStripMenuItem.Click += new System.EventHandler(this.programToolStripMenuItem_Click);
-            // 
             // DictionariesPanel
             // 
             this.DictionariesPanel.AutoScroll = true;
-            this.DictionariesPanel.Controls.Add(this.customButton2);
             this.DictionariesPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.DictionariesPanel.Location = new System.Drawing.Point(0, 26);
             this.DictionariesPanel.Name = "DictionariesPanel";
@@ -245,6 +229,7 @@
             // 
             this.FirstLanguageTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(86)))), ((int)(((byte)(87)))));
             this.FirstLanguageTextBox.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FirstLanguageTextBox.ForeColor = System.Drawing.SystemColors.Menu;
             this.FirstLanguageTextBox.Location = new System.Drawing.Point(3, 92);
             this.FirstLanguageTextBox.Multiline = true;
             this.FirstLanguageTextBox.Name = "FirstLanguageTextBox";
@@ -256,6 +241,7 @@
             // 
             this.TranslatedTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(86)))), ((int)(((byte)(87)))));
             this.TranslatedTextBox.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TranslatedTextBox.ForeColor = System.Drawing.SystemColors.Menu;
             this.TranslatedTextBox.Location = new System.Drawing.Point(420, 92);
             this.TranslatedTextBox.Multiline = true;
             this.TranslatedTextBox.Name = "TranslatedTextBox";
@@ -266,7 +252,6 @@
             // AddWordPanel
             // 
             this.AddWordPanel.Controls.Add(this.AddWordcustomButton);
-            this.AddWordPanel.Controls.Add(this.reversePicture);
             this.AddWordPanel.Controls.Add(this.FirstLanguageTextBox);
             this.AddWordPanel.Controls.Add(this.ForeignLabel);
             this.AddWordPanel.Controls.Add(this.TranslatedTextBox);
@@ -278,77 +263,6 @@
             this.AddWordPanel.Size = new System.Drawing.Size(788, 342);
             this.AddWordPanel.TabIndex = 9;
             this.AddWordPanel.Visible = false;
-            // 
-            // reversePicture
-            // 
-            this.reversePicture.Image = global::DictionaryWithUI.Properties.Resources.reverseButtonWhite;
-            this.reversePicture.Location = new System.Drawing.Point(371, 5);
-            this.reversePicture.Name = "reversePicture";
-            this.reversePicture.Size = new System.Drawing.Size(40, 40);
-            this.reversePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.reversePicture.TabIndex = 8;
-            this.reversePicture.TabStop = false;
-            // 
-            // WordsShowPanel
-            // 
-            this.WordsShowPanel.Controls.Add(this.customButton3);
-            this.WordsShowPanel.Controls.Add(this.customButton1);
-            this.WordsShowPanel.Controls.Add(this.TranslatedWords);
-            this.WordsShowPanel.Controls.Add(this.WordsFirstLanguage);
-            this.WordsShowPanel.Location = new System.Drawing.Point(12, 96);
-            this.WordsShowPanel.Name = "WordsShowPanel";
-            this.WordsShowPanel.Size = new System.Drawing.Size(798, 342);
-            this.WordsShowPanel.TabIndex = 10;
-            // 
-            // TranslatedWords
-            // 
-            this.TranslatedWords.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(49)))), ((int)(((byte)(52)))));
-            this.TranslatedWords.ForeColor = System.Drawing.Color.White;
-            this.TranslatedWords.FormattingEnabled = true;
-            this.TranslatedWords.Location = new System.Drawing.Point(462, 3);
-            this.TranslatedWords.Name = "TranslatedWords";
-            this.TranslatedWords.Size = new System.Drawing.Size(314, 329);
-            this.TranslatedWords.TabIndex = 1;
-            // 
-            // WordsFirstLanguage
-            // 
-            this.WordsFirstLanguage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(49)))), ((int)(((byte)(52)))));
-            this.WordsFirstLanguage.ForeColor = System.Drawing.Color.White;
-            this.WordsFirstLanguage.FormattingEnabled = true;
-            this.WordsFirstLanguage.Location = new System.Drawing.Point(0, -2);
-            this.WordsFirstLanguage.Name = "WordsFirstLanguage";
-            this.WordsFirstLanguage.Size = new System.Drawing.Size(314, 329);
-            this.WordsFirstLanguage.TabIndex = 0;
-            this.WordsFirstLanguage.Click += new System.EventHandler(this.WordsFirstLanguage_Click);
-            // 
-            // customButton2
-            // 
-            this.customButton2.Checked = false;
-            this.customButton2.Location = new System.Drawing.Point(3, 3);
-            this.customButton2.Name = "customButton2";
-            this.customButton2.Size = new System.Drawing.Size(102, 37);
-            this.customButton2.TabIndex = 0;
-            this.customButton2.TextOnTheButton = "English|Ukrainian";
-            this.customButton2.Clicked += new System.EventHandler(this.CheckIfCheckedExists);
-            this.customButton2.Click += new System.EventHandler(this.CheckIfCheckedExists);
-            // 
-            // customButton3
-            // 
-            this.customButton3.Checked = false;
-            this.customButton3.Location = new System.Drawing.Point(338, 49);
-            this.customButton3.Name = "customButton3";
-            this.customButton3.Size = new System.Drawing.Size(102, 37);
-            this.customButton3.TabIndex = 3;
-            this.customButton3.TextOnTheButton = "Delete";
-            // 
-            // customButton1
-            // 
-            this.customButton1.Checked = false;
-            this.customButton1.Location = new System.Drawing.Point(338, 6);
-            this.customButton1.Name = "customButton1";
-            this.customButton1.Size = new System.Drawing.Size(102, 37);
-            this.customButton1.TabIndex = 2;
-            this.customButton1.TextOnTheButton = "Edit";
             // 
             // AddWordcustomButton
             // 
@@ -392,6 +306,49 @@
             this.TranslatedExprLabel.Size = new System.Drawing.Size(356, 37);
             this.TranslatedExprLabel.TabIndex = 6;
             // 
+            // WordsShowPanel
+            // 
+            this.WordsShowPanel.Controls.Add(this.DeletewordBtn);
+            this.WordsShowPanel.Controls.Add(this.TranslatedWords);
+            this.WordsShowPanel.Controls.Add(this.WordsFirstLanguage);
+            this.WordsShowPanel.Location = new System.Drawing.Point(12, 96);
+            this.WordsShowPanel.Name = "WordsShowPanel";
+            this.WordsShowPanel.Size = new System.Drawing.Size(798, 342);
+            this.WordsShowPanel.TabIndex = 10;
+            // 
+            // DeletewordBtn
+            // 
+            this.DeletewordBtn.Checked = false;
+            this.DeletewordBtn.Location = new System.Drawing.Point(337, 295);
+            this.DeletewordBtn.Name = "DeletewordBtn";
+            this.DeletewordBtn.Size = new System.Drawing.Size(102, 37);
+            this.DeletewordBtn.TabIndex = 3;
+            this.DeletewordBtn.TextOnTheButton = "Delete";
+            this.DeletewordBtn.Clicked += new System.EventHandler(this.DeletewordBtn_Clicked);
+            // 
+            // TranslatedWords
+            // 
+            this.TranslatedWords.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(49)))), ((int)(((byte)(52)))));
+            this.TranslatedWords.ForeColor = System.Drawing.Color.White;
+            this.TranslatedWords.FormattingEnabled = true;
+            this.TranslatedWords.Location = new System.Drawing.Point(462, 3);
+            this.TranslatedWords.Name = "TranslatedWords";
+            this.TranslatedWords.Size = new System.Drawing.Size(314, 329);
+            this.TranslatedWords.TabIndex = 1;
+            this.TranslatedWords.Tag = "2";
+            // 
+            // WordsFirstLanguage
+            // 
+            this.WordsFirstLanguage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(49)))), ((int)(((byte)(52)))));
+            this.WordsFirstLanguage.ForeColor = System.Drawing.Color.White;
+            this.WordsFirstLanguage.FormattingEnabled = true;
+            this.WordsFirstLanguage.Location = new System.Drawing.Point(0, 3);
+            this.WordsFirstLanguage.Name = "WordsFirstLanguage";
+            this.WordsFirstLanguage.Size = new System.Drawing.Size(314, 329);
+            this.WordsFirstLanguage.TabIndex = 0;
+            this.WordsFirstLanguage.Tag = "1";
+            this.WordsFirstLanguage.Click += new System.EventHandler(this.WordsFirstLanguage_Click);
+            // 
             // Dictionary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -400,20 +357,19 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.DictionariesPanel);
             this.Controls.Add(this.DictionarymenuStrip);
-            this.Controls.Add(this.WordsShowPanel);
             this.Controls.Add(this.AddWordPanel);
+            this.Controls.Add(this.WordsShowPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.DictionarymenuStrip;
             this.MaximizeBox = false;
             this.Name = "Dictionary";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ShowIcon = false;
+            this.Text = "Dictionary";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Dictionary_FormClosing);
             this.DictionarymenuStrip.ResumeLayout(false);
             this.DictionarymenuStrip.PerformLayout();
-            this.DictionariesPanel.ResumeLayout(false);
             this.AddWordPanel.ResumeLayout(false);
             this.AddWordPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.reversePicture)).EndInit();
             this.WordsShowPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -424,10 +380,8 @@
         private System.Windows.Forms.MenuStrip DictionarymenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vievToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dictionaryToolStripMenuItem;
         private System.Windows.Forms.Panel DictionariesPanel;
-        private CustomButton customButton2;
         private System.Windows.Forms.ToolStripMenuItem translatorToolStripMenuItem;
         private System.Windows.Forms.TextBox FirstLanguageTextBox;
         private System.Windows.Forms.TextBox TranslatedTextBox;
@@ -440,22 +394,20 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addWordToolStripMenuItem;
         private CustomButton AddWordcustomButton;
-        private System.Windows.Forms.PictureBox reversePicture;
         private System.Windows.Forms.ToolStripMenuItem languageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
         private System.Windows.Forms.Panel WordsShowPanel;
         private System.Windows.Forms.ListBox TranslatedWords;
         private System.Windows.Forms.ListBox WordsFirstLanguage;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem programToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem findWordToolStripMenuItem;
-        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
-        private System.Windows.Forms.ToolStripMenuItem thremeToolStripMenuItem;
-        private CustomButton customButton3;
-        private CustomButton customButton1;
+        private System.Windows.Forms.ToolStripTextBox FindWordTextBox;
+        private CustomButton DeletewordBtn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem addDictionaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteDictionaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportWordToSeparateFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripComboBox ResultComboBox;
     }
 }
 

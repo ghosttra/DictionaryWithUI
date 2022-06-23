@@ -81,9 +81,10 @@
             this.Controls.Add(this.firstLanguageCombBox);
             this.Controls.Add(this.NewDictionaryLabel);
             this.Controls.Add(this.AddDictionaryBtn);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AddDictionaryForm";
-            this.Text = "AddDictionaryForm";
+            this.ShowIcon = false;
+            this.Text = "Add dictionary";
             this.ResumeLayout(false);
 
         }
