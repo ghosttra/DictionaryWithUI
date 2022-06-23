@@ -39,19 +39,14 @@ namespace DictionaryWithUI
                 }
                 Translate.AppendChild(Translates);
             }
-            SaveFileDialog saveFile = new SaveFileDialog();
-            saveFile.Filter = "XML Files (*.xml)|*.xml";
-            var res = saveFile.ShowDialog();
-            if (res == DialogResult.OK)
+            SaveFileDialog saveFile = new SaveFileDialog() { Filter = "XML Files (*.xml)|*.xml" };
+            if (saveFile.ShowDialog() == DialogResult.OK)
                 xmlDocument.Save(saveFile.FileName);
         }
         public static void Load(List<Translate> translates)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Multiselect = false;
-            fileDialog.Filter = "XML Files (*.xml)|*.xml";
-            DialogResult dialogResult = fileDialog.ShowDialog();
-            if (dialogResult == DialogResult.OK)
+            OpenFileDialog fileDialog = new OpenFileDialog() {Multiselect = false, Filter = "XML Files (*.xml)|*.xml" };
+            if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.Load(fileDialog.FileName);
@@ -60,9 +55,15 @@ namespace DictionaryWithUI
                     Translate translate = new Translate();
                     for (int r = 0; r < xmlDocument.DocumentElement.ChildNodes[i].ChildNodes.Count; r++)
                     {
-                        if (r == 2)
+                        if (r != 2)
                         {
-
+                            if (r == 0)
+                                translate.Language = (xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].InnerText);
+                            else if (r == 1)
+                                translate.Word = (xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].InnerText);
+                        }
+                        else
+                        {
                             for (int j = 0; j < xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes.Count; j++)
                             {
                                 if (translate.translates.Keys.ToList().Find(pred => pred == xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes[j].Name) == null)
@@ -70,10 +71,6 @@ namespace DictionaryWithUI
                                 translate.translates[xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes[j].Name].Add(xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].ChildNodes[j].InnerText);
                             }
                         }
-                        else if (r == 0)
-                            translate.Language = (xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].InnerText);
-                        else if (r == 1)
-                            translate.Word = (xmlDocument.DocumentElement.ChildNodes[i].ChildNodes[r].InnerText);
                     }
                     translates.Add(translate);
                 }

@@ -57,5 +57,6 @@ namespace DictionaryWithUI
             Checked = !Checked;
             Clicked?.Invoke(sender,e);
         }
+
     }
 }

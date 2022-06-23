@@ -21,5 +21,15 @@ namespace DictionaryWithUI
             get { return labeltext.Text; }
             set { labeltext.Text = value; }
         }
+        static int EdgeSize = Properties.Resources.purplecustbuttonLEFTedge.Width;
+        public void Normalizate()
+        {
+            labeltext.AutoSize = true;
+            Width = EdgeSize * 2 + labeltext.Width;
+            labeltext.AutoSize = false;
+            pictureBoxLeftEdge.Image = Properties.Resources.graycustbuttonLEFTedge;
+            pictureBoxRightEdge.Image = Properties.Resources.graycustbuttonRIGHTedge;
+            labeltext.BackColor = Color.FromArgb(79, 100, 111);
+        }
     }
 }
