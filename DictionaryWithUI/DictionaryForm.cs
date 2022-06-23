@@ -338,29 +338,33 @@ namespace DictionaryWithUI
             Translate translate = new Translate();
             if (SelectedButton != null)
             {
-                translate.Word = WordsFirstLanguage.SelectedItem.ToString();
-                translate.Language = SelectedButton.TextOnTheButton.Split('|')[0];
-                translate.translates = translates[translates.IndexOf(translates.Find(p => p.Word == translate.Word))].translates;
-                var sfd = new SaveFileDialog();
-                sfd.Filter = "txt files (*.txt)|*.txt";
-                sfd.FileName = translate.Word + ".txt";
-                sfd.ShowDialog();
-                string path = sfd.FileName;
-                using (StreamWriter sw = new StreamWriter(path))
+                if (WordsFirstLanguage.SelectedItem != null)
                 {
-                    sw.WriteLine($"The word: {WordsFirstLanguage.SelectedItem} | {translate.Language}\nTranslates into:");
-                    foreach (var item in translate.translates)
+                    translate.Word = WordsFirstLanguage.SelectedItem.ToString();
+                    translate.Language = SelectedButton.TextOnTheButton.Split('|')[0];
+                    translate.translates = translates[translates.IndexOf(translates.Find(p => p.Word == translate.Word))].translates;
+                    var sfd = new SaveFileDialog();
+                    sfd.Filter = "txt files (*.txt)|*.txt";
+                    sfd.FileName = translate.Word + ".txt";
+                    sfd.ShowDialog();
+                    string path = sfd.FileName;
+                    using (StreamWriter sw = new StreamWriter(path))
                     {
-                        foreach (var item1 in item.Value)
-                            sw.WriteLine($"{item1} | {item.Key}");
-                    }
+                        sw.WriteLine($"The word: {WordsFirstLanguage.SelectedItem} | {translate.Language}\nTranslates into:");
+                        foreach (var item in translate.translates)
+                        {
+                            foreach (var item1 in item.Value)
+                                sw.WriteLine($"{item1} | {item.Key}");
+                        }
 
+                    }
                 }
             }
         }
 
         private void FindWordTextBox_TextChanged(object sender, EventArgs e)
         {
+            ResultComboBox.Items.Clear();
             if (FindWordTextBox.Text.Length > 0)
             {
                 foreach (var i in translates.FindAll(pred => pred.Word == FindWordTextBox.Text))
@@ -368,7 +372,6 @@ namespace DictionaryWithUI
                     var list = i.translates.Values.ToList();
                     foreach (var l in list)
                     {
-                        ResultComboBox.Items.Clear();
                         ResultComboBox.Items.AddRange(l.ToArray());
                     }
                 }

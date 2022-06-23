@@ -178,7 +178,7 @@
             this.toolStripSeparator3,
             this.ResultComboBox});
             this.findWordToolStripMenuItem.Name = "findWordToolStripMenuItem";
-            this.findWordToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.findWordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.findWordToolStripMenuItem.Text = "Find word";
             // 
             // FindWordTextBox
@@ -213,7 +213,7 @@
             // languageToolStripMenuItem
             // 
             this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
-            this.languageToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.languageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.languageToolStripMenuItem.Text = "Language";
             // 
             // DictionariesPanel
